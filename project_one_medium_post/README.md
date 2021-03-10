@@ -16,6 +16,8 @@ https://istoia9.medium.com/this-will-bring-you-insights-about-airbnbs-business-i
 	| - reviews.csv
 
 	- airbnb_boston_seattle_analysis.ipynb
+	- question_1.png
+	- question_3.png
 	- README.md
 
 
