@@ -19,7 +19,7 @@ from sklearn.pipeline import Pipeline, FeatureUnion
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import classification_report
 from sklearn.externals import joblib
 
@@ -91,7 +91,18 @@ def build_model():
             ('clf', MultiOutputClassifier(KNeighborsClassifier()))
              ])
     
-    return pipeline
+    ## defining parameters range for GridSearch, and creating gridsearch_parameters
+    min_samples_leaf_range = [1, 2, 3]
+    min_samples_split_range = [2, 4, 6]
+    gridsearch_parameters = {\
+            'clf__estimator__min_samples_leaf': min_samples_leaf_range,\
+            'clf__estimator__min_samples_split': min_samples_split_range\
+                            }
+    
+    # using GridSearch in order to calibrate pipeline
+    optimized_pipeline = GridSearchCV(pipeline, gridsearch_parameters, verbose=10)
+    
+    return optimized_pipeline
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
