@@ -6,6 +6,8 @@ A Machine Learning pipeline was coded in this project.
 
 The pipeline's goal is to analyse some Figure Eight's data, respectively messages sent by people who found themselves in disaster situations, and train a ML model which will tag a new message accordingly.
 
+The ML model is a sklearn pipeline object which uses a MultiOutputClassifier(KNeighborsClassifier()) as estimator. GridSearch is applied in order to enable parameters' selection.
+
 The process' stages are:
 a. ETL - extracts and transforms the raw data, and loads them to a SQLAlchemy database
 b. Machine Learning - fits a model to the data previously saved in the database, predicting message tags
